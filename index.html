@@ -12,6 +12,7 @@
 }
 
 body {
+   <button id="playBtn">🔊 تشغيل أنشودة رمضان</button>
     margin: 0;
     height: 100vh;
     overflow: hidden;
@@ -157,15 +158,19 @@ p {
 </div>
 
 <audio id="nasheed">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9b7f2d1b67.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_6b8a88a6bb.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function playSound(){
-    const audio = document.getElementById("nasheed");
+const audio = document.getElementById("ramadanAudio");
+const btn = document.getElementById("playBtn");
+
+btn.onclick = () => {
     audio.play();
-}
+    btn.style.display = "none";
+};
 </script>
+
 
 </body>
 </html>
