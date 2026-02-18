@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Ramadan Mubarak 2026</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap');
+
+:root{
+  --gold: #f5c97a;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Amiri', serif;
+    background: radial-gradient(circle at top, #0c1e3c, #02030f);
+    color: white;
+}
+
+/* STARS */
+.stars {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(1px 1px at 40% 60%, white, transparent),
+        radial-gradient(2px 2px at 70% 40%, white, transparent),
+        radial-gradient(1px 1px at 90% 20%, white, transparent);
+    animation: twinkle 3s infinite alternate;
+}
+@keyframes twinkle { from {opacity:.5;} to {opacity:1;} }
+
+/* MOON */
+.moon {
+    position: absolute;
+    top: 50px;
+    right: 70px;
+    width: 120px;
+    height: 120px;
+    background: #fff6cc;
+    border-radius: 50%;
+    box-shadow: 0 0 40px white;
+}
+
+/* LANTERNS */
+.lantern {
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    background: var(--gold);
+    border-radius: 6px;
+    box-shadow: 0 0 15px var(--gold);
+    animation: float 6s ease-in-out infinite;
+}
+.l1 { left: 15%; bottom: -80px; animation-delay: 0s; }
+.l2 { left: 50%; bottom: -100px; animation-delay: 2s; }
+.l3 { left: 80%; bottom: -90px; animation-delay: 4s; }
+
+@keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-600px); }
+}
+
+/* DOORS */
+.door-wrap {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.door {
+    width: 160px;
+    height: 300px;
+    background: linear-gradient(#6b3e26, #2b140b);
+    border: 4px solid gold;
+    transform-origin: left;
+    animation: open 4s forwards;
+}
+.right {
+    transform-origin: right;
+    animation-delay: .4s;
+}
+
+@keyframes open {
+    to { transform: rotateY(-75deg); }
+}
+
+/* TEXT */
+.content {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    animation: appear 3s forwards;
+    animation-delay: 4s;
+}
+@keyframes appear { to {opacity:1;} }
+
+h1 {
+    font-size: 48px;
+    color: gold;
+}
+p {
+    font-size: 26px;
+    margin: 8px 0;
+}
+
+.quote {
+    opacity: 0;
+    animation: fade 2s forwards;
+}
+.q1 { animation-delay: 5s; }
+.q2 { animation-delay: 7s; }
+.q3 { animation-delay: 9s; }
+
+@keyframes fade { to {opacity:1;} }
+
+.footer {
+    margin-top: 20px;
+    font-size: 22px;
+}
+</style>
+</head>
+
+<body onclick="playSound()">
+
+<div class="stars"></div>
+<div class="moon"></div>
+
+<div class="lantern l1"></div>
+<div class="lantern l2"></div>
+<div class="lantern l3"></div>
+
+<div class="door-wrap">
+    <div class="door"></div>
+    <div class="door right"></div>
+</div>
+
+<div class="content">
+    <h1>رمضان مبارك ٢٠٢٦</h1>
+    <p>1447 هـ</p>
+
+    <p class="quote q1">🌙 اللهم اجعل هذا الشهر بداية نور</p>
+    <p class="quote q2">✨ وراحة للقلب وسلامًا للروح</p>
+    <p class="quote q3">💛 رمضان شهر الرحمة والمغفرة</p>
+
+    <p class="footer">
+        إلى الجميع: رمضان مبارك 🤍
+    </p>
+</div>
+
+<audio id="nasheed">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9b7f2d1b67.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function playSound(){
+    const audio = document.getElementById("nasheed");
+    audio.play();
+}
+</script>
+
+</body>
+</html>
