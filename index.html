@@ -1,224 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Ramadan Kareem 🌙</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramadan Mubarak 2026</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
-body {
-  background: radial-gradient(circle at top, #0b2c4d, #020b1a);
-  height: 100vh;
-  overflow: hidden;
-  color: white;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Amiri',serif}
+
+body{
+  background:radial-gradient(circle at top,#0b2a4a,#020b1c);
+  color:#fff;
+  overflow:hidden;
+  height:100vh;
+  text-align:center;
 }
 
-/* Moon */
-.moon {
-  position: absolute;
-  top: 40px;
-  right: 60px;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  box-shadow: -20px 0 0 0 #f5f3ce;
+/* 🌙 Crescent Moon */
+.moon{
+  position:absolute;
+  top:60px;
+  right:80px;
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  box-shadow:-30px 0 0 10px #fff;
+  opacity:0.9;
 }
 
-/* Lanterns */
-.lantern {
-  position: absolute;
-  top: -120px;
-  width: 40px;
-  height: 80px;
-  background: radial-gradient(circle, #ffd86b, #ff9f1c);
-  border-radius: 10px;
-  animation: swing 4s ease-in-out infinite;
-  box-shadow: 0 0 30px #ffb703;
+/* ✨ Stars */
+.star{
+  position:absolute;
+  width:2px;height:2px;
+  background:#fff;
+  animation:twinkle 3s infinite;
 }
-.l1 { left: 15%; }
-.l2 { left: 45%; animation-delay: 1s; }
-.l3 { left: 75%; animation-delay: 2s; }
+@keyframes twinkle{50%{opacity:.3}}
 
-@keyframes swing {
-  0%,100% { transform: rotate(5deg); }
-  50% { transform: rotate(-5deg); }
+/* 🏮 Lanterns */
+.lantern{
+  position:absolute;
+  top:-120px;
+  width:40px;height:60px;
+  background:linear-gradient(#ffd36b,#ff9f1c);
+  border-radius:10px;
+  box-shadow:0 0 25px #ffcc66;
+  animation:swing 4s ease-in-out infinite;
 }
-
-/* Flowers */
-.flower {
-  position: absolute;
-  top: -10px;
-  font-size: 20px;
-  animation: fall linear infinite;
-}
-@keyframes fall {
-  to { transform: translateY(110vh); }
+@keyframes swing{
+  0%,100%{transform:rotate(5deg)}
+  50%{transform:rotate(-5deg)}
 }
 
-/* Doors */
-.door-wrapper {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
+/* 🌸 Flower Rain */
+.flower{
+  position:absolute;
+  top:-20px;
+  font-size:18px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh)}
 }
 
-.door {
-  width: 160px;
-  height: 300px;
-  background: linear-gradient(145deg, #6b3e26, #3b1d10);
-  border: 4px solid gold;
-  transform-origin: left;
-  transition: transform 3s ease;
+/* 🚪 Doors */
+.door-wrapper{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:320px;height:420px;
+  display:flex;
+}
+.door{
+  width:50%;
+  background:linear-gradient(#6b3e26,#3a1f10);
+  border:2px solid #d4af37;
+  transition:transform 2s ease;
+}
+.open .left{transform:translateX(-100%)}
+.open .right{transform:translateX(100%)}
+
+/* 🕌 Content */
+#content{display:none;padding-top:80px}
+.fade{animation:fade 2s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+button{
+  background:#d4af37;
+  border:none;
+  padding:12px 25px;
+  font-size:18px;
+  cursor:pointer;
+  margin-top:20px;
+  border-radius:25px;
 }
 
-.door.right {
-  transform-origin: right;
-}
-
-.open .left {
-  transform: perspective(800px) rotateY(-100deg);
-}
-.open .right {
-  transform: perspective(800px) rotateY(100deg);
-}
-
-/* Content */
-.content {
-  position: absolute;
-  top: 20%;
-  width: 100%;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 2s ease;
-}
-
-.show { opacity: 1; }
-
-button {
-  padding: 12px 25px;
-  background: gold;
-  border: none;
-  border-radius: 25px;
-  font-size: 18px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.gift {
-  margin-top: 30px;
-  font-size: 20px;
-  animation: fade 2s ease;
-}
-
-@keyframes fade {
-  from { opacity:0; transform: scale(0.8); }
-  to { opacity:1; transform: scale(1); }
+/* 🎁 Gift */
+.gift{
+  margin-top:20px;
+  font-size:20px;
+  color:#ffd36b;
 }
 </style>
 </head>
 
 <body>
 
-<audio autoplay loop>
+<!-- 🎵 Music -->
+<audio id="bgMusic" loop>
   <source src="ramadan.mp3" type="audio/mpeg">
 </audio>
 
+<button id="startBtn">🌙 Start Ramadan</button>
+
 <div class="moon"></div>
 
-<div class="lantern l1"></div>
-<div class="lantern l2"></div>
-<div class="lantern l3"></div>
+<!-- Stars -->
+<script>
+for(let i=0;i<120;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*100+"%";
+  document.body.appendChild(s);
+}
+</script>
 
+<!-- Lanterns -->
+<script>
+for(let i=0;i<10;i++){
+  let l=document.createElement("div");
+  l.className="lantern";
+  l.style.left=(i*10+5)+"%";
+  l.style.animationDelay=Math.random()*2+"s";
+  document.body.appendChild(l);
+}
+</script>
+
+<!-- Flowers -->
+<script>
+for(let i=0;i<30;i++){
+  let f=document.createElement("div");
+  f.className="flower";
+  f.innerHTML="🌸";
+  f.style.left=Math.random()*100+"%";
+  f.style.animationDuration=5+Math.random()*5+"s";
+  document.body.appendChild(f);
+}
+</script>
+
+<!-- Doors -->
 <div class="door-wrapper" id="doors">
   <div class="door left"></div>
   <div class="door right"></div>
 </div>
 
-<div class="content" id="content">
-  <h1>🌙 Ramadan Kareem 🌙</h1>
-  <p>1st Night of Ramadan – Hijri Month Begins</p>
-  <p style="margin-top:10px;">
-    “Ramadan is the month whose beginning is mercy,
-    whose middle is forgiveness,
-    and whose end is freedom from the Fire.”
-  </p>
+<!-- Content -->
+<div id="content" class="fade">
+  <h1>🌙 رمضان مبارك 🌙</h1>
+  <p>Ramadan Mubarak 2026</p>
+  <p>Hijri Year: 1447 هـ</p>
+  <p>May Allah fill your heart with peace, light, and mercy.</p>
 
-  <button id="promiseBtn">🤍 I Promise</button>
-
-  <div class="gift" id="gift"></div>
+  <div id="question"></div>
+  <button id="promiseBtn" style="display:none">🤍 I Promise</button>
+  <div id="gift" class="gift"></div>
 </div>
 
 <script>
-/* Flower rain */
-setInterval(() => {
-  const f = document.createElement("div");
-  f.className = "flower";
-  f.innerHTML = "🌸";
-  f.style.left = Math.random()*100 + "vw";
-  f.style.animationDuration = 4 + Math.random()*4 + "s";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),8000);
-}, 300);
+const questions=[
+"Will you pray on time?",
+"Will you speak kindly?",
+"Will you avoid anger?",
+"Will you help others?",
+"Will you forgive?",
+"Will you read Quran daily?",
+"Will you give charity?",
+"Will you respect parents?",
+"Will you control ego?",
+"Will you be honest?",
+"Will you avoid gossip?",
+"Will you thank Allah?",
+"Will you help the poor?",
+"Will you fast sincerely?",
+"Will you seek forgiveness?"
+];
 
-/* Door opening */
-setTimeout(() => {
+const gifts=[
+"📖 Indeed Allah is Near – Quran 2:186",
+"🌸 Patience is light",
+"🕌 Allah loves the kind",
+"✨ Mercy surrounds you",
+"🤲 Dua is accepted",
+"📖 Quran heals hearts",
+"🌙 Faith brings peace",
+"🕊 Forgiveness elevates",
+"🌹 Gratitude multiplies",
+"⭐ Angels pray for you",
+"📿 Dhikr calms soul",
+"💛 Charity protects",
+"🕌 Prayer is strength",
+"🌸 Hope never dies",
+"🤍 Allah is Most Merciful"
+];
+
+let i=0;
+
+document.getElementById("startBtn").onclick=()=>{
+  document.getElementById("bgMusic").play();
   document.getElementById("doors").classList.add("open");
-  document.getElementById("content").classList.add("show");
-}, 3000);
+  document.getElementById("startBtn").style.display="none";
 
-const promises = [
-  "Will you pray sincerely this Ramadan?",
-  "Will you speak kindly?",
-  "Will you forgive others?",
-  "Will you help the needy?",
-  "Will you control anger?",
-  "Will you read Quran daily?",
-  "Will you give charity?",
-  "Will you avoid lies?",
-  "Will you respect parents?",
-  "Will you lower your gaze?",
-  "Will you be grateful?",
-  "Will you keep promises?",
-  "Will you help silently?",
-  "Will you make dua?",
-  "Will you seek Allah’s mercy?"
-];
+  setTimeout(()=>{
+    document.getElementById("content").style.display="block";
+    showQuestion();
+  },2000);
+};
 
-const gifts = [
-  "🌸 Allah loves those who repent – Quran 2:222",
-  "🌸 Indeed with hardship comes ease – Quran 94:6",
-  "🌸 Allah is Near – Quran 2:186",
-  "🌸 He is the Most Merciful",
-  "🌸 Your reward is multiplied",
-  "🌸 Angels pray for you",
-  "🌸 Your heart is purified",
-  "🌸 Sins are forgiven",
-  "🌸 Peace enters your soul",
-  "🌸 Light fills your path",
-  "🌸 Dua is accepted",
-  "🌸 Faith grows stronger",
-  "🌸 Blessings increase",
-  "🌸 Mercy surrounds you",
-  "🌸 Jannah is promised"
-];
+function showQuestion(){
+  if(i<15){
+    document.getElementById("question").innerText=questions[i];
+    document.getElementById("promiseBtn").style.display="inline-block";
+  }
+}
 
-let step = 0;
-const giftDiv = document.getElementById("gift");
-const btn = document.getElementById("promiseBtn");
-
-btn.onclick = () => {
-  if (step < 15) {
-    giftDiv.innerHTML = `<b>Promise:</b> ${promises[step]}<br><br><b>Gift:</b> ${gifts[step]}`;
-    step++;
-  } else {
-    giftDiv.innerHTML = "🌙 Ramadan Mubarak 🤍 May Allah accept all your promises.";
-    btn.style.display = "none";
+document.getElementById("promiseBtn").onclick=()=>{
+  document.getElementById("gift").innerText=gifts[i];
+  i++;
+  if(i<15){
+    setTimeout(showQuestion,1500);
+  }else{
+    document.getElementById("question").innerText="🌙 May Allah accept all promises 🌙";
+    document.getElementById("promiseBtn").style.display="none";
   }
 };
 </script>
