@@ -2,207 +2,225 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ramadan Promise Doors</title>
+<title>Ramadan Kareem 🌙</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+
 body {
-    margin: 0;
-    overflow: hidden;
-    background: radial-gradient(circle at top, #050b2e, #000);
-    font-family: 'Georgia', serif;
-    color: gold;
+  background: radial-gradient(circle at top, #0b2c4d, #020b1a);
+  height: 100vh;
+  overflow: hidden;
+  color: white;
 }
 
-/* Crescent Moon */
+/* Moon */
 .moon {
-    position: absolute;
-    top: 60px;
-    right: 120px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    box-shadow: -20px 0 0 0 #f5e6a8;
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  box-shadow: -20px 0 0 0 #f5f3ce;
 }
-
-/* Doors */
-.door-container {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 300px;
-    height: 420px;
-    transform: translateX(-50%);
-    perspective: 1000px;
-}
-
-.door {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(145deg, #b8860b, #ffd700);
-    border: 4px solid #fff1a8;
-    box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
-    transition: transform 3s ease-in-out;
-}
-
-.left { transform-origin: left; }
-.right { right: 0; transform-origin: right; }
-
-.open-left { transform: rotateY(-110deg); }
-.open-right { transform: rotateY(110deg); }
 
 /* Lanterns */
 .lantern {
-    position: absolute;
-    width: 28px;
-    height: 45px;
-    background: gold;
-    border-radius: 6px;
-    box-shadow: 0 0 25px gold;
-    animation: float 6s infinite ease-in-out;
+  position: absolute;
+  top: -120px;
+  width: 40px;
+  height: 80px;
+  background: radial-gradient(circle, #ffd86b, #ff9f1c);
+  border-radius: 10px;
+  animation: swing 4s ease-in-out infinite;
+  box-shadow: 0 0 30px #ffb703;
 }
+.l1 { left: 15%; }
+.l2 { left: 45%; animation-delay: 1s; }
+.l3 { left: 75%; animation-delay: 2s; }
 
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-40px); }
-    100% { transform: translateY(0); }
+@keyframes swing {
+  0%,100% { transform: rotate(5deg); }
+  50% { transform: rotate(-5deg); }
 }
 
 /* Flowers */
 .flower {
-    position: absolute;
-    font-size: 18px;
-    animation: fall 8s linear infinite;
+  position: absolute;
+  top: -10px;
+  font-size: 20px;
+  animation: fall linear infinite;
 }
-
 @keyframes fall {
-    0% { transform: translateY(-40px); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
+  to { transform: translateY(110vh); }
 }
 
-/* Center Content */
-.center {
-    position: absolute;
-    top: 18%;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 3s;
+/* Doors */
+.door-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
-.promises {
-    margin-top: 20px;
+.door {
+  width: 160px;
+  height: 300px;
+  background: linear-gradient(145deg, #6b3e26, #3b1d10);
+  border: 4px solid gold;
+  transform-origin: left;
+  transition: transform 3s ease;
 }
+
+.door.right {
+  transform-origin: right;
+}
+
+.open .left {
+  transform: perspective(800px) rotateY(-100deg);
+}
+.open .right {
+  transform: perspective(800px) rotateY(100deg);
+}
+
+/* Content */
+.content {
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.show { opacity: 1; }
 
 button {
-    margin: 6px;
-    padding: 10px 18px;
-    background: gold;
-    border: none;
-    border-radius: 22px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-button:disabled {
-    background: #777;
-    cursor: not-allowed;
+  padding: 12px 25px;
+  background: gold;
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 .gift {
-    margin-top: 20px;
-    font-size: 28px;
-    display: none;
+  margin-top: 30px;
+  font-size: 20px;
+  animation: fade 2s ease;
+}
+
+@keyframes fade {
+  from { opacity:0; transform: scale(0.8); }
+  to { opacity:1; transform: scale(1); }
 }
 </style>
 </head>
 
 <body>
 
+<audio autoplay loop>
+  <source src="ramadan.mp3" type="audio/mpeg">
+</audio>
+
 <div class="moon"></div>
 
-<div class="door-container">
-    <div class="door left"></div>
-    <div class="door right"></div>
+<div class="lantern l1"></div>
+<div class="lantern l2"></div>
+<div class="lantern l3"></div>
+
+<div class="door-wrapper" id="doors">
+  <div class="door left"></div>
+  <div class="door right"></div>
 </div>
 
-<div class="center" id="center">
-    <h1>✨ Ramadan Mubarak ✨</h1>
-    <p>May Allah fill your heart with light, mercy, and peace</p>
-    <p>🌙 1–15 Ramadan | Hijri Calendar 🌙</p>
+<div class="content" id="content">
+  <h1>🌙 Ramadan Kareem 🌙</h1>
+  <p>1st Night of Ramadan – Hijri Month Begins</p>
+  <p style="margin-top:10px;">
+    “Ramadan is the month whose beginning is mercy,
+    whose middle is forgiveness,
+    and whose end is freedom from the Fire.”
+  </p>
 
-    <div class="promises" id="promises"></div>
+  <button id="promiseBtn">🤍 I Promise</button>
 
-    <div class="gift" id="gift"></div>
+  <div class="gift" id="gift"></div>
 </div>
-
-<audio id="music" src="ramadan.mp3"></audio>
 
 <script>
-const leftDoor = document.querySelector('.left');
-const rightDoor = document.querySelector('.right');
-const center = document.getElementById('center');
-const music = document.getElementById('music');
-const promisesDiv = document.getElementById('promises');
-const giftDiv = document.getElementById('gift');
+/* Flower rain */
+setInterval(() => {
+  const f = document.createElement("div");
+  f.className = "flower";
+  f.innerHTML = "🌸";
+  f.style.left = Math.random()*100 + "vw";
+  f.style.animationDuration = 4 + Math.random()*4 + "s";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),8000);
+}, 300);
 
-const gifts = [
-    "🤍 Gift of Patience",
-    "✨ Gift of Forgiveness",
-    "🌸 Gift of Kindness",
-    "🌙 Gift of Faith",
-    "💛 Gift of Gratitude",
-    "🕊️ Gift of Peace",
-    "📿 Gift of Prayer",
-    "🌟 Gift of Guidance",
-    "🔥 Gift of Strength",
-    "🤲 Gift of Du’a",
-    "💎 Gift of Wisdom",
-    "🌿 Gift of Humility",
-    "☀️ Gift of Hope",
-    "🎁 Gift of Mercy",
-    "👑 Gift of Jannah (Ameen)"
+/* Door opening */
+setTimeout(() => {
+  document.getElementById("doors").classList.add("open");
+  document.getElementById("content").classList.add("show");
+}, 3000);
+
+const promises = [
+  "Will you pray sincerely this Ramadan?",
+  "Will you speak kindly?",
+  "Will you forgive others?",
+  "Will you help the needy?",
+  "Will you control anger?",
+  "Will you read Quran daily?",
+  "Will you give charity?",
+  "Will you avoid lies?",
+  "Will you respect parents?",
+  "Will you lower your gaze?",
+  "Will you be grateful?",
+  "Will you keep promises?",
+  "Will you help silently?",
+  "Will you make dua?",
+  "Will you seek Allah’s mercy?"
 ];
 
-// Create 15 promise buttons
-for(let i = 0; i < 15; i++){
-    const btn = document.createElement('button');
-    btn.innerText = `Promise Day ${i+1}`;
-    btn.onclick = () => {
-        giftDiv.style.display = 'block';
-        giftDiv.innerText = gifts[i];
-        btn.disabled = true;
-    };
-    promisesDiv.appendChild(btn);
-}
+const gifts = [
+  "🌸 Allah loves those who repent – Quran 2:222",
+  "🌸 Indeed with hardship comes ease – Quran 94:6",
+  "🌸 Allah is Near – Quran 2:186",
+  "🌸 He is the Most Merciful",
+  "🌸 Your reward is multiplied",
+  "🌸 Angels pray for you",
+  "🌸 Your heart is purified",
+  "🌸 Sins are forgiven",
+  "🌸 Peace enters your soul",
+  "🌸 Light fills your path",
+  "🌸 Dua is accepted",
+  "🌸 Faith grows stronger",
+  "🌸 Blessings increase",
+  "🌸 Mercy surrounds you",
+  "🌸 Jannah is promised"
+];
 
-// Lanterns
-for(let i=0;i<15;i++){
-    const l = document.createElement('div');
-    l.className = 'lantern';
-    l.style.left = Math.random()*100 + '%';
-    l.style.top = Math.random()*60 + '%';
-    l.style.animationDelay = Math.random()*5 + 's';
-    document.body.appendChild(l);
-}
+let step = 0;
+const giftDiv = document.getElementById("gift");
+const btn = document.getElementById("promiseBtn");
 
-// Flower rain
-setInterval(() => {
-    const f = document.createElement('div');
-    f.className = 'flower';
-    f.innerText = '🌸';
-    f.style.left = Math.random()*100 + '%';
-    document.body.appendChild(f);
-    setTimeout(() => f.remove(), 8000);
-}, 250);
-
-// Door opening
-setTimeout(() => {
-    leftDoor.classList.add('open-left');
-    rightDoor.classList.add('open-right');
-    center.style.opacity = 1;
-    music.play();
-}, 2000);
+btn.onclick = () => {
+  if (step < 15) {
+    giftDiv.innerHTML = `<b>Promise:</b> ${promises[step]}<br><br><b>Gift:</b> ${gifts[step]}`;
+    step++;
+  } else {
+    giftDiv.innerHTML = "🌙 Ramadan Mubarak 🤍 May Allah accept all your promises.";
+    btn.style.display = "none";
+  }
+};
 </script>
 
 </body>
