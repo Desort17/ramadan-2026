@@ -2,195 +2,207 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ramadan Mubarak 2026</title>
+<title>Ramadan Promise Doors</title>
 
 <style>
-body{
-  margin:0;
-  font-family: 'Arial', sans-serif;
-  background: radial-gradient(circle at top, #0b1d3a, #02040f);
-  color:white;
-  overflow:hidden;
-  text-align:center;
+body {
+    margin: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #050b2e, #000);
+    font-family: 'Georgia', serif;
+    color: gold;
 }
 
-/* Stars */
-.stars{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(2px 2px at 20% 30%, white, transparent),
-    radial-gradient(1px 1px at 50% 60%, white, transparent),
-    radial-gradient(2px 2px at 80% 40%, white, transparent);
+/* Crescent Moon */
+.moon {
+    position: absolute;
+    top: 60px;
+    right: 120px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: -20px 0 0 0 #f5e6a8;
 }
 
-/* Moon */
-.moon{
-  position:absolute;
-  top:40px;
-  right:60px;
-  width:120px;
-  height:120px;
-  background:#fff6cc;
-  border-radius:50%;
-  box-shadow:0 0 40px white;
+/* Doors */
+.door-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 300px;
+    height: 420px;
+    transform: translateX(-50%);
+    perspective: 1000px;
 }
 
-/* Lantern */
-.lantern{
-  position:absolute;
-  top:0;
-  width:40px;
-  height:60px;
-  background:gold;
-  border-radius:6px;
-  box-shadow:0 0 15px gold;
-  animation:swing 3s ease-in-out infinite alternate;
-}
-@keyframes swing{
-  from{transform:rotate(-5deg);}
-  to{transform:rotate(5deg);}
+.door {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(145deg, #b8860b, #ffd700);
+    border: 4px solid #fff1a8;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+    transition: transform 3s ease-in-out;
 }
 
-/* Door */
-.door{
-  position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:200px;
-  height:300px;
-  background:linear-gradient(#6b3e26,#2b140b);
-  border:4px solid gold;
-  animation:openDoor 4s forwards;
-}
-@keyframes openDoor{
-  to{transform:translateX(-50%) rotateY(-75deg);}
+.left { transform-origin: left; }
+.right { right: 0; transform-origin: right; }
+
+.open-left { transform: rotateY(-110deg); }
+.open-right { transform: rotateY(110deg); }
+
+/* Lanterns */
+.lantern {
+    position: absolute;
+    width: 28px;
+    height: 45px;
+    background: gold;
+    border-radius: 6px;
+    box-shadow: 0 0 25px gold;
+    animation: float 6s infinite ease-in-out;
 }
 
-/* Content */
-#content{
-  display:none;
-  margin-top:180px;
-}
-
-/* Button */
-button{
-  padding:12px 20px;
-  border:none;
-  border-radius:20px;
-  background:gold;
-  font-size:18px;
-  cursor:pointer;
-  margin-top:20px;
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-40px); }
+    100% { transform: translateY(0); }
 }
 
 /* Flowers */
-.flower{
-  position:fixed;
-  top:-20px;
-  font-size:20px;
-  animation:fall 5s linear;
+.flower {
+    position: absolute;
+    font-size: 18px;
+    animation: fall 8s linear infinite;
 }
-@keyframes fall{
-  to{transform:translateY(110vh);}
+
+@keyframes fall {
+    0% { transform: translateY(-40px); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Center Content */
+.center {
+    position: absolute;
+    top: 18%;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 3s;
+}
+
+.promises {
+    margin-top: 20px;
+}
+
+button {
+    margin: 6px;
+    padding: 10px 18px;
+    background: gold;
+    border: none;
+    border-radius: 22px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #777;
+    cursor: not-allowed;
+}
+
+.gift {
+    margin-top: 20px;
+    font-size: 28px;
+    display: none;
 }
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
 <div class="moon"></div>
-<div class="lantern" style="left:20%"></div>
-<div class="lantern" style="left:70%"></div>
 
-<div class="door"></div>
-
-<div id="content">
-  <h1>🌙 Ramadan Mubarak 2026</h1>
-  <p>1447 هـ</p>
-
-  <p id="question"></p>
-  <button onclick="openGift()">🤍 I Promise</button>
-
-  <h2 id="gift"></h2>
+<div class="door-container">
+    <div class="door left"></div>
+    <div class="door right"></div>
 </div>
 
-<audio id="music" loop>
-  <source src="ramadan.mp3" type="audio/mpeg">
-</audio>
+<div class="center" id="center">
+    <h1>✨ Ramadan Mubarak ✨</h1>
+    <p>May Allah fill your heart with light, mercy, and peace</p>
+    <p>🌙 1–15 Ramadan | Hijri Calendar 🌙</p>
+
+    <div class="promises" id="promises"></div>
+
+    <div class="gift" id="gift"></div>
+</div>
+
+<audio id="music" src="ramadan.mp3"></audio>
 
 <script>
-const questions = [
-  "Will you pray on time?",
-  "Will you respect your parents?",
-  "Will you help the poor?",
-  "Will you speak kindly?",
-  "Will you forgive others?",
-  "Will you avoid lies?",
-  "Will you read Quran?",
-  "Will you control anger?",
-  "Will you help neighbors?",
-  "Will you give charity?",
-  "Will you stay patient?",
-  "Will you keep promises?",
-  "Will you avoid bad words?",
-  "Will you thank Allah?",
-  "Will you spread peace?"
-];
+const leftDoor = document.querySelector('.left');
+const rightDoor = document.querySelector('.right');
+const center = document.getElementById('center');
+const music = document.getElementById('music');
+const promisesDiv = document.getElementById('promises');
+const giftDiv = document.getElementById('gift');
 
 const gifts = [
-  "📖 Allah is with the patient (Quran 2:153)",
-  "🌸 Kindness is charity (Hadith)",
-  "✨ Remember Allah and He will remember you",
-  "🕌 Prayer brings peace",
-  "💛 Allah loves good deeds",
-  "🌷 Truth leads to Jannah",
-  "📿 Quran heals hearts",
-  "🌙 Patience is light",
-  "🤍 Helping others brings reward",
-  "🎁 Charity never decreases wealth",
-  "🌼 Allah rewards patience",
-  "✨ Keep your promises",
-  "🕊️ Good words are charity",
-  "🌟 Gratitude increases blessings",
-  "🌺 Peace is from Islam"
+    "🤍 Gift of Patience",
+    "✨ Gift of Forgiveness",
+    "🌸 Gift of Kindness",
+    "🌙 Gift of Faith",
+    "💛 Gift of Gratitude",
+    "🕊️ Gift of Peace",
+    "📿 Gift of Prayer",
+    "🌟 Gift of Guidance",
+    "🔥 Gift of Strength",
+    "🤲 Gift of Du’a",
+    "💎 Gift of Wisdom",
+    "🌿 Gift of Humility",
+    "☀️ Gift of Hope",
+    "🎁 Gift of Mercy",
+    "👑 Gift of Jannah (Ameen)"
 ];
 
-let index = 0;
-
-setTimeout(()=>{
-  document.getElementById("content").style.display="block";
-  document.getElementById("music").play().catch(()=>{});
-  showQuestion();
-},4500);
-
-function showQuestion(){
-  document.getElementById("question").innerText = questions[index];
+// Create 15 promise buttons
+for(let i = 0; i < 15; i++){
+    const btn = document.createElement('button');
+    btn.innerText = `Promise Day ${i+1}`;
+    btn.onclick = () => {
+        giftDiv.style.display = 'block';
+        giftDiv.innerText = gifts[i];
+        btn.disabled = true;
+    };
+    promisesDiv.appendChild(btn);
 }
 
-function openGift(){
-  flowerRain();
-  document.getElementById("gift").innerText = gifts[index];
-  index++;
-  if(index < questions.length){
-    setTimeout(showQuestion,2000);
-  } else {
-    document.getElementById("question").innerText="🎉 Ramadan Gifts Completed!";
-  }
+// Lanterns
+for(let i=0;i<15;i++){
+    const l = document.createElement('div');
+    l.className = 'lantern';
+    l.style.left = Math.random()*100 + '%';
+    l.style.top = Math.random()*60 + '%';
+    l.style.animationDelay = Math.random()*5 + 's';
+    document.body.appendChild(l);
 }
 
-function flowerRain(){
-  for(let i=0;i<15;i++){
-    let f=document.createElement("div");
-    f.className="flower";
-    f.style.left=Math.random()*100+"%";
-    f.innerText="🌸";
+// Flower rain
+setInterval(() => {
+    const f = document.createElement('div');
+    f.className = 'flower';
+    f.innerText = '🌸';
+    f.style.left = Math.random()*100 + '%';
     document.body.appendChild(f);
-    setTimeout(()=>f.remove(),5000);
-  }
-}
+    setTimeout(() => f.remove(), 8000);
+}, 250);
+
+// Door opening
+setTimeout(() => {
+    leftDoor.classList.add('open-left');
+    rightDoor.classList.add('open-right');
+    center.style.opacity = 1;
+    music.play();
+}, 2000);
 </script>
 
 </body>
