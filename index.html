@@ -1,190 +1,197 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Ramadan Mubarak 2026</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap');
-#playBtn{
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: gold;
-    border: none;
-    padding: 12px 20px;
-    font-size: 18px;
-    border-radius: 25px;
-    cursor: pointer;
-    box-shadow: 0 0 15px gold;
-    z-index: 9999;
+body{
+  margin:0;
+  font-family: 'Arial', sans-serif;
+  background: radial-gradient(circle at top, #0b1d3a, #02040f);
+  color:white;
+  overflow:hidden;
+  text-align:center;
 }
 
-:root{
-  --gold: #f5c97a;
+/* Stars */
+.stars{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 50% 60%, white, transparent),
+    radial-gradient(2px 2px at 80% 40%, white, transparent);
 }
 
-body {
-   <button id="playBtn">🔊 تشغيل أنشودة رمضان</button>
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Amiri', serif;
-    background: radial-gradient(circle at top, #0c1e3c, #02030f);
-    color: white;
+/* Moon */
+.moon{
+  position:absolute;
+  top:40px;
+  right:60px;
+  width:120px;
+  height:120px;
+  background:#fff6cc;
+  border-radius:50%;
+  box-shadow:0 0 40px white;
 }
 
-/* STARS */
-.stars {
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(2px 2px at 20% 30%, white, transparent),
-        radial-gradient(1px 1px at 40% 60%, white, transparent),
-        radial-gradient(2px 2px at 70% 40%, white, transparent),
-        radial-gradient(1px 1px at 90% 20%, white, transparent);
-    animation: twinkle 3s infinite alternate;
+/* Lantern */
+.lantern{
+  position:absolute;
+  top:0;
+  width:40px;
+  height:60px;
+  background:gold;
+  border-radius:6px;
+  box-shadow:0 0 15px gold;
+  animation:swing 3s ease-in-out infinite alternate;
 }
-@keyframes twinkle { from {opacity:.5;} to {opacity:1;} }
-
-/* MOON */
-.moon {
-    position: absolute;
-    top: 50px;
-    right: 70px;
-    width: 120px;
-    height: 120px;
-    background: #fff6cc;
-    border-radius: 50%;
-    box-shadow: 0 0 40px white;
+@keyframes swing{
+  from{transform:rotate(-5deg);}
+  to{transform:rotate(5deg);}
 }
 
-/* LANTERNS */
-.lantern {
-    position: absolute;
-    width: 40px;
-    height: 60px;
-    background: var(--gold);
-    border-radius: 6px;
-    box-shadow: 0 0 15px var(--gold);
-    animation: float 6s ease-in-out infinite;
+/* Door */
+.door{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:200px;
+  height:300px;
+  background:linear-gradient(#6b3e26,#2b140b);
+  border:4px solid gold;
+  animation:openDoor 4s forwards;
 }
-.l1 { left: 15%; bottom: -80px; animation-delay: 0s; }
-.l2 { left: 50%; bottom: -100px; animation-delay: 2s; }
-.l3 { left: 80%; bottom: -90px; animation-delay: 4s; }
-
-@keyframes float {
-    from { transform: translateY(0); }
-    to { transform: translateY(-600px); }
+@keyframes openDoor{
+  to{transform:translateX(-50%) rotateY(-75deg);}
 }
 
-/* DOORS */
-.door-wrap {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-.door {
-    width: 160px;
-    height: 300px;
-    background: linear-gradient(#6b3e26, #2b140b);
-    border: 4px solid gold;
-    transform-origin: left;
-    animation: open 4s forwards;
-}
-.right {
-    transform-origin: right;
-    animation-delay: .4s;
+/* Content */
+#content{
+  display:none;
+  margin-top:180px;
 }
 
-@keyframes open {
-    to { transform: rotateY(-75deg); }
+/* Button */
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:20px;
+  background:gold;
+  font-size:18px;
+  cursor:pointer;
+  margin-top:20px;
 }
 
-/* TEXT */
-.content {
-    position: absolute;
-    top: 30%;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    animation: appear 3s forwards;
-    animation-delay: 4s;
+/* Flowers */
+.flower{
+  position:fixed;
+  top:-20px;
+  font-size:20px;
+  animation:fall 5s linear;
 }
-@keyframes appear { to {opacity:1;} }
-
-h1 {
-    font-size: 48px;
-    color: gold;
-}
-p {
-    font-size: 26px;
-    margin: 8px 0;
-}
-
-.quote {
-    opacity: 0;
-    animation: fade 2s forwards;
-}
-.q1 { animation-delay: 5s; }
-.q2 { animation-delay: 7s; }
-.q3 { animation-delay: 9s; }
-
-@keyframes fade { to {opacity:1;} }
-
-.footer {
-    margin-top: 20px;
-    font-size: 22px;
+@keyframes fall{
+  to{transform:translateY(110vh);}
 }
 </style>
 </head>
 
-<body onclick="playSound()">
+<body>
 
 <div class="stars"></div>
 <div class="moon"></div>
+<div class="lantern" style="left:20%"></div>
+<div class="lantern" style="left:70%"></div>
 
-<div class="lantern l1"></div>
-<div class="lantern l2"></div>
-<div class="lantern l3"></div>
+<div class="door"></div>
 
-<div class="door-wrap">
-    <div class="door"></div>
-    <div class="door right"></div>
+<div id="content">
+  <h1>🌙 Ramadan Mubarak 2026</h1>
+  <p>1447 هـ</p>
+
+  <p id="question"></p>
+  <button onclick="openGift()">🤍 I Promise</button>
+
+  <h2 id="gift"></h2>
 </div>
 
-<div class="content">
-    <h1>رمضان مبارك ٢٠٢٦</h1>
-    <p>1447 هـ</p>
-
-    <p class="quote q1">🌙 اللهم اجعل هذا الشهر بداية نور</p>
-    <p class="quote q2">✨ وراحة للقلب وسلامًا للروح</p>
-    <p class="quote q3">💛 رمضان شهر الرحمة والمغفرة</p>
-
-    <p class="footer">
-        إلى الجميع: رمضان مبارك 🤍
-    </p>
-</div>
-
-<audio id="nasheed">
-  <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_6b8a88a6bb.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="ramadan.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const audio = document.getElementById("ramadanAudio");
-const btn = document.getElementById("playBtn");
+const questions = [
+  "Will you pray on time?",
+  "Will you respect your parents?",
+  "Will you help the poor?",
+  "Will you speak kindly?",
+  "Will you forgive others?",
+  "Will you avoid lies?",
+  "Will you read Quran?",
+  "Will you control anger?",
+  "Will you help neighbors?",
+  "Will you give charity?",
+  "Will you stay patient?",
+  "Will you keep promises?",
+  "Will you avoid bad words?",
+  "Will you thank Allah?",
+  "Will you spread peace?"
+];
 
-btn.onclick = () => {
-    audio.play();
-    btn.style.display = "none";
-};
+const gifts = [
+  "📖 Allah is with the patient (Quran 2:153)",
+  "🌸 Kindness is charity (Hadith)",
+  "✨ Remember Allah and He will remember you",
+  "🕌 Prayer brings peace",
+  "💛 Allah loves good deeds",
+  "🌷 Truth leads to Jannah",
+  "📿 Quran heals hearts",
+  "🌙 Patience is light",
+  "🤍 Helping others brings reward",
+  "🎁 Charity never decreases wealth",
+  "🌼 Allah rewards patience",
+  "✨ Keep your promises",
+  "🕊️ Good words are charity",
+  "🌟 Gratitude increases blessings",
+  "🌺 Peace is from Islam"
+];
+
+let index = 0;
+
+setTimeout(()=>{
+  document.getElementById("content").style.display="block";
+  document.getElementById("music").play().catch(()=>{});
+  showQuestion();
+},4500);
+
+function showQuestion(){
+  document.getElementById("question").innerText = questions[index];
+}
+
+function openGift(){
+  flowerRain();
+  document.getElementById("gift").innerText = gifts[index];
+  index++;
+  if(index < questions.length){
+    setTimeout(showQuestion,2000);
+  } else {
+    document.getElementById("question").innerText="🎉 Ramadan Gifts Completed!";
+  }
+}
+
+function flowerRain(){
+  for(let i=0;i<15;i++){
+    let f=document.createElement("div");
+    f.className="flower";
+    f.style.left=Math.random()*100+"%";
+    f.innerText="🌸";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),5000);
+  }
+}
 </script>
-
 
 </body>
 </html>
