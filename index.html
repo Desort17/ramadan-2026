@@ -17,6 +17,11 @@ body{
   text-align:center;
 }
 
+/* Layers */
+#scene{position:relative;z-index:1}
+#content{position:relative;z-index:5}
+
+/* Moon */
 .moon{
   position:absolute;
   top:60px;
@@ -26,6 +31,7 @@ body{
   box-shadow:-30px 0 0 10px #fff;
 }
 
+/* Lanterns */
 .lantern{
   position:absolute;
   top:-120px;
@@ -40,6 +46,7 @@ body{
   50%{transform:rotate(-5deg)}
 }
 
+/* Flowers */
 .flower{
   position:absolute;
   top:-20px;
@@ -48,6 +55,7 @@ body{
 }
 @keyframes fall{to{transform:translateY(110vh)}}
 
+/* Doors */
 .door-wrapper{
   position:absolute;
   bottom:0;
@@ -55,6 +63,7 @@ body{
   transform:translateX(-50%);
   width:320px;height:420px;
   display:flex;
+  z-index:2;
 }
 .door{
   width:50%;
@@ -65,19 +74,18 @@ body{
 .open .left{transform:translateX(-100%)}
 .open .right{transform:translateX(100%)}
 
+/* Content */
 #content{
   display:none;
   padding-top:80px;
-  animation:fade 2s ease;
 }
-@keyframes fade{from{opacity:0}to{opacity:1}}
 
 .box{
   margin:20px auto;
   padding:15px;
   width:80%;
   max-width:500px;
-  background:rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.1);
   border-radius:15px;
 }
 
@@ -94,12 +102,15 @@ button{
 .gift{
   color:#ffd36b;
   font-size:20px;
-  margin-top:15px;
 }
 </style>
 </head>
 
 <body>
+
+<div id="scene">
+  <div class="moon"></div>
+</div>
 
 <audio id="bgMusic" loop>
   <source src="ramadan.mp3" type="audio/mpeg">
@@ -107,8 +118,7 @@ button{
 
 <button id="startBtn">🌙 Start Ramadan</button>
 
-<div class="moon"></div>
-
+<!-- Lanterns & Flowers -->
 <script>
 for(let i=0;i<10;i++){
   let l=document.createElement("div");
@@ -116,7 +126,7 @@ for(let i=0;i<10;i++){
   l.style.left=(i*10+5)+"%";
   document.body.appendChild(l);
 }
-for(let i=0;i<25;i++){
+for(let i=0;i<30;i++){
   let f=document.createElement("div");
   f.className="flower";
   f.innerHTML="🌸";
@@ -126,17 +136,19 @@ for(let i=0;i<25;i++){
 }
 </script>
 
+<!-- Doors -->
 <div class="door-wrapper" id="doors">
   <div class="door left"></div>
   <div class="door right"></div>
 </div>
 
+<!-- Content -->
 <div id="content">
   <h1>🌙 رمضان مبارك 🌙</h1>
   <p>Ramadan Mubarak 2026 — 1447 هـ</p>
 
   <div id="questionBox" class="box"></div>
-  <button id="promiseBtn" style="display:none">🤍 I Promise</button>
+  <button id="promiseBtn">🤍 I Promise</button>
   <div id="giftBox" class="box gift"></div>
 </div>
 
@@ -160,7 +172,7 @@ const questions=[
 ];
 
 const gifts=[
-"📖 Allah is Near – Quran 2:186",
+"📖 Allah is Near — Quran 2:186",
 "🌸 Patience is light",
 "🕌 Allah loves kindness",
 "✨ Mercy surrounds you",
@@ -191,19 +203,19 @@ document.getElementById("startBtn").onclick=()=>{
 };
 
 function showQuestion(){
-  document.getElementById("giftBox").innerText="";
   document.getElementById("questionBox").innerText=questions[step];
-  document.getElementById("promiseBtn").style.display="inline-block";
+  document.getElementById("giftBox").innerText="";
 }
 
 document.getElementById("promiseBtn").onclick=()=>{
   document.getElementById("giftBox").innerText=gifts[step];
   step++;
 
-  if(step<15){
-    setTimeout(showQuestion,1800);
+  if(step<questions.length){
+    setTimeout(showQuestion,1500);
   }else{
-    document.getElementById("questionBox").innerText="🌙 May Allah accept all your promises 🌙";
+    document.getElementById("questionBox").innerText=
+      "🌙 May Allah accept all your promises 🌙";
     document.getElementById("promiseBtn").style.display="none";
   }
 };
